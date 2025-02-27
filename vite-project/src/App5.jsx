@@ -129,22 +129,43 @@
  * : 함수형 업데이트
  * 
  */
-import React,{useState} from "react";
-// import { use } from "react";
+// import React,{useState} from "react";
+// // import { use } from "react";
+
+// function Counter(){
+//   const [ count, setCount ] = useState(0);
+
+//   const handleClick = ()=>{
+//     setCount((preCount)=>preCount+1);
+//     setCount((preCount)=>preCount+1);
+//     setCount((preCount)=>preCount+1);
+//   }
+//   return(
+//   <>
+//     <p>카운터 : {count}</p>
+//     <button onClick={handleClick}>증가</button>
+//   </>
+//   )
+// }
+// export default Counter
+
+// 내일 <p>태그 <button> 태그로 이루어진 완벽한 Counter 컴포넌트 작성하여
+// 실행하는 것부터 시작
+
+import { useState } from "react";
+import './App.css'
 
 function Counter(){
-  const [ count, setCount ] = useState(0);
+  const[ count, setCount ] = useState(0)
 
-  const handleClick = ()=>{
-    setCount((preCount)=>preCount+1);
-    setCount((preCount)=>preCount+1);
-    setCount((preCount)=>preCount+1);
-  }
   return(
-  <>
-    <p>카운터 : {count}</p>
-    <button onClick={handleClick}>증가</button>
-  </>
-  )
+    <>
+      <p>카운터: {count}</p>
+      <button onClick={() => setCount((count) => count + 1)}>
+        버튼
+        </button>
+    </>
+  );
 }
+// 
 export default Counter
