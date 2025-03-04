@@ -12,11 +12,11 @@ export default function MyForm() {
     alert(`${text} 라고 입력함.`)
     // console.log(`${text}`)
     event.preventDefault();
-  }
+  };
 
   return(
     <form onSubmit={handleSubmit}>
-      <input type="text" onChange={event =>setText(event.targer.value)} value={text} />
+      <input type="text" onChange={event =>setText(event.target.value)} value={text} />
       <input type="submit" value="제출" />
     </form>
   );
