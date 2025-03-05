@@ -17,11 +17,14 @@ function MyForm(){
       <label>First Name </label>
       <input type="text" onChange={event =>setFirstName(event.target.value)} value={firstName} />
       <br /><br /><br />
+
       <label>Last Name </label>
       <input type="text" onChange={event =>setLastName(event.target.value)} value={lastName} />
       <br /><br /><br />
+
       <label>Email </label>
       <input type="text" onChange={event =>setEmail(event.target.value)} value={email} />
+      
       <input type="submit" value="제출" />
     </form>
   );
