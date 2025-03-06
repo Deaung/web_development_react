@@ -8,11 +8,11 @@ function App() {
 
   const handleChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
     setName(event.target.value);
-  }
-  const handleSubmit = (event:React.ChangeEvent<HTMLInputElement>)=>{
+  };
+  const handleSubmit = (event:React.FormEvent<HTMLInputElement>)=>{
   event.preventDefault();
   alert(`안녕 ${name}`)
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}> 
