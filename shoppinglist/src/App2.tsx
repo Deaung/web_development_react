@@ -1,10 +1,16 @@
-import { useState } from 'react'
-import  Container  from '@mui/material/Container'
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import './App.css'
-import AddItem from './components/AddItem'
+import { useState } from 'react';
+
+import  Container  from '@mui/material/Container';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import AddItem from './components/AddItem';
+// Shopping 항목을 표시하는 목록 관련 Component 들 import
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+
+import './App.css';
 
 export type Item={
   product: string;
@@ -31,6 +37,18 @@ function App() {
           </Toolbar>
         </AppBar>
         <AddItem addItem={addItem} />
+        <List>
+          {
+            items.map((item, index) => 
+              <ListItem key={index} divider>
+                <ListItemText
+                  primary={item.product}
+                  secondary={item.amount}
+                />
+              </ListItem>
+            )
+          }
+        </List>
       </Container>
     </>
   )
