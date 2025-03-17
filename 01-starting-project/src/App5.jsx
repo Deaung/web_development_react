@@ -7,36 +7,12 @@ import { EXAMPLES } from "./data_updated";
 
 function App() {
 
-  const [ selectedTopic, setSelectedTopic ] = useState();
+  const [ selectedTopic, setSelectedTopic ] = useState('');
 
   function handleSelect(selectedTopic){
     console.log(selectedTopic)
     setSelectedTopic(selectedTopic);
   }
-
-  // 리액트에서는 변수의 데이터에 HTML코드 삽입 가능
-  let tabContent = <>
-    <p>
-      Please Select a Topic
-    </p>
-    </>   
-
-  // 버튼을 클릭 했을 때 해당 내용을 참조하여 내용이 출력되어야함
-
-  if(selectedTopic) { // selectedTopic에 값이 무엇이라도 있다면 이하 코드 생성
-    tabContent = (
-      <>
-        <h3>{EXAMPLES[selectedTopic].title}</h3>
-        <p>{EXAMPLES[selectedTopic].description}</p>
-        <pre>
-          <code>
-          {EXAMPLES[selectedTopic].code}
-          </code>
-        </pre>
-      </>
-    )
-  }
-
 
   return (
     <div>
@@ -63,9 +39,17 @@ function App() {
             <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
             <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
           </menu>
-          <div id="tab-content">
-            {tabContent}
+          {selectedTopic === '' ? <h3>버튼클릭하세요</h3> : 
+            <div id="tab-content" >
+            <h3>{EXAMPLES[selectedTopic].title}</h3>
+            <p>{EXAMPLES[selectedTopic].description}</p>
+            <pre>
+              <code>
+                {EXAMPLES[selectedTopic].code}
+              </code>
+            </pre>
           </div>
+          }   
         </section>
       </main>
     </div>  
