@@ -1,42 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useReducer } from 'react'
 import './App.css'
-import Counter from './Counter1'
-import StateUse from './StateUse'
-import ReducerUse from './ReducerUse'
+import LoginForm from './components/LoginForm';
+import Reducer from './reducer/Reducer';
+
+
+const [ state, dispatch] = useReducer (Reducer, { isLogin : false, message:'',});
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-    <Counter/>
-    <br />
-    <StateUse/>
-    <br />
-    <ReducerUse/>
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
-    </>
+    <div>
+      {state.isLogin ? (
+        <> 
+          <strong>welcom</strong>
+          <button onClick={()=> dispatch({type:'LOGOUT'})}>LOGOUT</button>
+        </>
+      ) : (
+        <LoginForm state={state} dispatch={dispatch}/>
+      )}
+    </div>
   )
 }
 
