@@ -1,40 +1,41 @@
-const Reducer = (state,action) => {
-  switch(action.type){
-    case "LOGIN_SUSSCS" :
-    return {
-      ...state,
-      user : action.payload,
-      isLogin : true,
-      message: "로그인 성공"
-    };
-    case "MISS_ID" :
-      return{
-      ...state,
-      isLogin: false,
-      message : '아이디 입력 오류'
-    };
-    case "MISS_PASSWORD":
-      return{
+const Reducer = (state, action) => {
+  switch(action.type) {
+    case "LOGIN_SUCCESS":
+      return {
+        ...state,
+        user: action.payload,
+        isLogin: true,
+        message: '로그인 성공했습니다🥨',
+      };
+    case "MISS_ID":
+      return {
         ...state,
         isLogin: false,
-        message:'비밀번호 입력 오류'
+        message: '아이디를 잘못 입력했습니다😅',
+      };
+    case "MISS_PASSWORD":
+      return {
+        ...state,
+        isLogin: false,
+        message: '비밀번호를 잘못 입력했습니다😪',
       };
     case "LOGIN_FAILURE":
-      return{
+      return {
         ...state,
         isLogin: false,
-        message : 'ID & PW not accurate',
+        message: 'ID & PASSWORD not accurate😨',
       };
     case "LOGOUT":
-      return{
+      return {
         ...state,
         isLogin: false,
-        message : '로그아웃했습니다.'
+        message: '로그아웃했습니다 🤔',
       };
-    default : 
-      return{
-      ...state
-    };
+    default:
+      return {
+        ...state
+      };
   }
-}
-export default Reducer
+};
+
+export default Reducer;
