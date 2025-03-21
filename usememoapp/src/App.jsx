@@ -1,55 +1,39 @@
-import { useMemo, useState } from 'react'
-
-import './App.css'
-import ShowState from './components/ShowState';
+import { useMemo, useState, useEffect } from "react";
+import './App.css';
 
 function App() {
-  const [number, setNumber]= useState(0);
-  const [text, setText]= useState('');
+  const [ number, setNumber ] = useState(0);
+  const [ isTrue, setIsTrue ] = useState(true);
 
-  function heavyCalc(){
-    let sum = 0;
-    for(let i = 0 ; i <1000000; i++){
-      sum+=i;
-    }
-    return sum;
-  }
-  const calc = useMemo(() => 
-    { console.log('반복수행중')
-      return heavyCalc();
-    },[]);
-  
-  // number 값을 바꾸는 함수
-  const increaseNum = () => {
-    setNumber((prev) => prev + 1); // 왜 setNumber(number+1)이 아닌지 생각
-  };
+  // const answer = isTrue ? "true" : "false"; 기초자료형(primitive type)
 
-  const decreaseNum = () => {
-    setNumber((prev) => prev - 1);
-  };
+  // const answer = { bool: isTrue ? "true" : "false" };
+  // 이대로면 객체 주소값이 렌더링 될 때 마다 
+  const answer = useMemo(()=> {
+    return {bool : isTrue ? "true" : "false"};
+  },[isTrue])
 
-  //text 값 바꿔주는 함수
+  // answer가 바뀔 때만 콘솔이 찍히도록 useEffect 적용
+  useEffect(() => {
+    console.log('answer 값이 변경되었습니다.');
+  }, [answer]);
 
-  const handleText = (e) => {
-    setText(e.target.value);
-  }
-
-  return (
-    <>
-      <h4>🎇 반복적이고 무거운 연산값</h4>
-      <p>{calc}</p>
-      <br /><br />
-      <h4>🎈 숫자 바꾸기</h4>
-      <button onClick={increaseNum}>+</button>
-      <button onClick={decreaseNum}>-</button>
-
-      <br /><br />
-      <h4>🎈 문자 바꾸기</h4>
-      <input type="text" onChange={handleText}/>
-      <br /><br />
-      <ShowState text={text} number={number}/>
-    </>
-  )
+  return(
+    <div>
+      <p>✨ number</p>
+      <input 
+        type="number" 
+        value={number}
+        onChange ={(e) => setNumber(e.target.value)}
+      />
+      <hr />
+      <p>✨ answer</p>    
+      {/* <p> True or False? : {answer} </p> */}
+      {/* <p> True or False? : {answer.bool} </p> */}
+      <p> True or False? : {answer['bool']} </p>
+      <button onClick={() => setIsTrue(!isTrue)}>Reverse</button>
+    </div>
+  );
 }
 
-export default App
+export default App;
