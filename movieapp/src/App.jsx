@@ -1,39 +1,26 @@
-import { useState, useEffect } from 'react'
+import Home from "./routes/Home";
 import './App.css'
-import Movie from './conponents/Movie';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Detail from "./routes/Detail";
 
 function App() {
-  const [ loading, setLoading ] = useState(true);
-  const [ movies, setMovies ] = useState([]);
-
-  // async - await
-  const getMovies = async() =>{
-    const response = await fetch(' https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year')
-    const json = await response.json();
-    setMovies(json.data.movies);
-    setLoading(false)
-  } // -> 이거 useEffect에 넣어서 렌더링 시 한번만 getMovies라는 함수 실행시킨다  는 의미
-
-  useEffect(() => {
-    getMovies(); 
-  },[])
-
-  // 장르를 받아올 예정 => 장르가 배열형태로 되어있음
 
   return (
-    <div>
-    {loading ? <h1>로딩 중...</h1> : 
-      <div> {movies.map(movie => 
-      <Movie key={movie.id} 
-      medium_cover_image ={movie.medium_cover_image}
-      title={movie.title}
-      summary = {movie.summary}
-      genres={movie.genres}/>
-      
-      )}</div>
-    }
-    </div>
-  )
+    <Router>
+      <Switch>
+        <Route path="/movie/:id">
+          <Detail />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
+    
+  );
 }
 
 export default App
+
+
+// https://yts.mx/api/v2/movie_details.json?movie_id=${id}
