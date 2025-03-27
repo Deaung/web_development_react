@@ -2,14 +2,17 @@ import { Link } from "react-router-dom";
 
 function Movie({id, coverimage , title, summary, genres}){
   return(
-    <div key={id}>
-    <img src={coverimage} alt={title} />
-    <h2>
+    <div className="movie-card">
+      <Link to={`/movie/${id}`}>
+        <img src={coverimage} alt={title} />
+      </Link>
+    <div className="movie-card-title">
       <Link to={`/movie/${id}`}>{title}</Link>
-    </h2>
-    <p>{summary}</p>
-    <ul>
-      {genres.map((genre) => (<li key={genre}>{genre}</li>))}
+    </div>
+    <ul className="movie-card-genres">
+      {genres.map((genre) => (
+        <li key={genre}>{genre}</li>
+        ))}
     </ul>
   </div>
   );
